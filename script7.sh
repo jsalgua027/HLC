@@ -1,24 +1,22 @@
 #!/bin/bash
 
-primeraLineaTexto1=$(head -1 texto1.txt)
-primeraLineaTexto2=$(head -1 texto2.txt)
-primeraLineaTexto3=$(head -1 texto3.txt)
+# Nombre del archivo tar
+archivo_tar="eje7.tar"
 
-if [ "$primeraLineaTexto1" == "alboran" ]; then 
+# Nombre del archivo de salida comprimido con gzip
+archivo_salida="toatoa.gz"
 
-cat texto1.txt >> texNuevo.txt
-fi
+# Extraer los primeros tres archivos del archivo tar
+tar -xvf "$archivo_tar" archivo1.txt archivo2.txt archivo3.txt
 
-if [ "$primeraLineaTexto2" == "alboran" ]; then 
+# Buscar líneas que contienen la cadena "ALBORAN" en los archivos y guardarlas en un nuevo archivo
+grep "ALBORAN" archivo1.txt archivo2.txt archivo3.txt > "$archivo_salida"
 
-cat texto1.txt >> texNuevo.txt
-fi
-if [ "$primeraLineaTexto2" == "alboran" ]; then 
+# Comprimir el nuevo archivo con gzip
+gzip "$archivo_salida"
 
-cat texto1.txt >> texNuevo.txt
-fi
+# Limpiar archivos temporales
+rm archivo1.txt archivo2.txt archivo3.txt
 
+echo "Proceso completado. El resultado se encuentra en $archivo_salida"
 
-echo $primeraLineaTexto1
-echo $primeraLineaTexto2
-echo $primeraLineaTexto3
